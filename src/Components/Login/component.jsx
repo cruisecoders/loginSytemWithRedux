@@ -9,16 +9,31 @@ class Login extends Component {
     username: '',
     password: '',
   }
-  getEmail = (data) => {
-    if (data.mail === this.state.email) {
+  getEmail = (data) => {  
+    if (data.field === 'email') {
       this.setState({
-        Username: data.e,
-      })
-      console.log('data=',data)
-      this.props.users.map(users => {
-        console.log("alll user from redux", users)
-      })
+        username: data.e,
+      }) 
     }
+    else {
+      this.setState({
+        username: data.e,
+      }) 
+    }
+  }
+  isLogin = () =>{
+    const loged = false
+    this.props.users.map(user => {
+      if( user.email === this.state.username && user.password === this.state.password ){
+         loged = true
+      }
+      else{
+        loged = false
+      }
+      if(loged){
+        return alert('fkjdgfldkhfkldhkldfshgklshlk')
+      }
+    })
   }
   render() {
     return (
@@ -34,7 +49,8 @@ class Login extends Component {
                 onChange={(e) => this.getEmail({ e: e.target.value, field: "email" })}
                 //  value={this.props.mail} onChange={this.props.getUsername}
                 placeholder="Email" />
-              {console.log(this.props.state)}
+              {console.log(this.props.users)}
+              {/* {console.log('state=',this.state)} */}
             </Row>
             <Row className="mt-3">
               <label for="exampleForm2" style={{ color: 'black', fontWeight: '500', fontSize: '20px' }} >Password:</label>
@@ -42,7 +58,7 @@ class Login extends Component {
             </Row>
             <Row className="mt-3" style={{ fontSize: '14px' }}>
               <Col lg="12" className="pl-4">
-                <input type="checkbox" className="custom-control-input" id="defaultLoginFormRemember" style={{color:'white'}} />
+                <input type="checkbox" className="custom-control-input" id="defaultLoginFormRemember" style={{ color: 'white' }} />
                 <label className="custom-control-label" for="defaultLoginFormRemember" style={{ color: 'black', fontWeight: '400', fontSize: '15px' }} >
                   keep me login</label>
               </Col>
@@ -51,19 +67,18 @@ class Login extends Component {
           </Col>
             </Row>
             <Row style={{ border: 'white' }}>
-              <button className="mt-3 btnColor4 p-2" style={{ width: '350px', backgroundColor: 'blue', color:'white' }} >LOGIN</button>
+              <button className="mt-3 btnColor4 p-2" style={{ width: '350px', backgroundColor: 'blue', color: 'white' }}
+                onClick={this.getEmail} >LOGIN</button>
             </Row>
             <Row className="pt-3 " style={{ marginLeft: '30px' }}>
               Not have accout?<span style={{ color: '#72c02c' }}>
-                <Link to='/signUp' style={{color:'blue', fontWeight:'400', marginLeft:'10px' }}> Register</Link>
+                <Link to='/signUp' style={{ color: 'blue', fontWeight: '400', marginLeft: '10px' }}> Register</Link>
               </span>
             </Row>
           </Col>
         </Row>
 
       </div>
-
-
     );
   }
 }

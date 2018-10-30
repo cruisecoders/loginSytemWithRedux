@@ -25,7 +25,9 @@ export const userReducer = (state = initial, action) => {
         case 'REGISTER':
         return{
             ...state,
-            users:action.payload,
+            users: [...state.users, action.payload],
+            // users: state.users.push([action.payload])
+            // users:[...state,action.payload],
         };
     default:
     return state;

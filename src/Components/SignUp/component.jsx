@@ -30,7 +30,7 @@ class SignUp extends Component {
   }
   registerUser = () => {
     this.props.registeration({ email: this.state.email, password: this.state.password, name: this.state.name })
-    console.log('data', this.state)
+    console.log('data', this.props.users)
   }
   render() {
     return (
