@@ -8,32 +8,46 @@ class Login extends Component {
   state = {
     username: '',
     password: '',
+    id:''
   }
-  getEmail = (data) => {  
+  getEmail = (data) => {
     if (data.field === 'email') {
       this.setState({
         username: data.e,
-      }) 
+      })
     }
     else {
       this.setState({
-        username: data.e,
-      }) 
+        password: data.e,
+      })
     }
   }
-  isLogin = () =>{
-    const loged = false
-    this.props.users.map(user => {
-      if( user.email === this.state.username && user.password === this.state.password ){
-         loged = true
-      }
-      else{
-        loged = false
-      }
-      if(loged){
-        return alert('fkjdgfldkhfkldhkldfshgklshlk')
-      }
-    })
+  isLogin = () => {
+    let loged = false;
+    
+    this.props.users.map(user => 
+      {
+      console.log('user', this.state)
+      if( user.email === this.state.username)
+      console.log('map',username)
+
+      {
+        const found = this.state.data.filter(t => t.email === this.state.username)
+       }
+      // if (user.email === this.state.username && user.password === this.state.password) {
+      //   loged = true;
+      //   // break;
+      //   console.log('login')
+      // }
+      // else {
+      //   loged = false;
+      //   console.log('not a user')
+
+      // }
+    });
+    if (loged) {
+      return alert('successfully logged in')
+    }
   }
   render() {
     return (
@@ -44,7 +58,7 @@ class Login extends Component {
               <h1 className="loginText d-flex align-self-center">LOGIN</h1>
             </Row>
             <Row>
-              <label for="exampleForm2" style={{ color: 'black', fontWeight: '500', fontSize: '20px' }}>Email:</label>
+              <label for="exampleForm7" style={{ color: 'black', fontWeight: '500', fontSize: '20px' }}>Email:</label>
               <input type="text" id="exampleForm2" className="form-control" value={this.state.username}
                 onChange={(e) => this.getEmail({ e: e.target.value, field: "email" })}
                 //  value={this.props.mail} onChange={this.props.getUsername}
@@ -53,8 +67,11 @@ class Login extends Component {
               {/* {console.log('state=',this.state)} */}
             </Row>
             <Row className="mt-3">
-              <label for="exampleForm2" style={{ color: 'black', fontWeight: '500', fontSize: '20px' }} >Password:</label>
-              <input type="Password" value={this.props.pass} onChange={this.props.getPassword} placeholder="Password" id="exampleForm2" className="form-control " />
+              <label for="exampleForm8" style={{ color: 'black', fontWeight: '500', fontSize: '20px' }} >Password:</label>
+              <input type="Password" value={this.state.password}
+                onChange={(e) => this.getEmail({ e: e.target.value, field: "password" })}
+                // value={this.props.pass} onChange={this.props.getPassword} 
+                placeholder="Password" id="exampleForm2" className="form-control " />
             </Row>
             <Row className="mt-3" style={{ fontSize: '14px' }}>
               <Col lg="12" className="pl-4">
@@ -68,7 +85,7 @@ class Login extends Component {
             </Row>
             <Row style={{ border: 'white' }}>
               <button className="mt-3 btnColor4 p-2" style={{ width: '350px', backgroundColor: 'blue', color: 'white' }}
-                onClick={this.getEmail} >LOGIN</button>
+                onClick={this.isLogin} >LOGIN</button>
             </Row>
             <Row className="pt-3 " style={{ marginLeft: '30px' }}>
               Not have accout?<span style={{ color: '#72c02c' }}>
